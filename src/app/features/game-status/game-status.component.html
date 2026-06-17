@@ -1,0 +1,19 @@
+<header class="game-status">
+  <h1>Bilrese-spelet</h1>
+
+  <p>
+    Hittade: {{ markedCount }} / {{ totalCount }}
+  </p>
+
+  <p>
+    Kvar: {{ remainingCount }}
+  </p>
+</header>
+
+@if (status === 'finished') {
+  <section class="finished-message" aria-live="polite">
+    <h2>Alla bilder är hittade!</h2>
+    <p>Bra jobbat.</p>
+  </section>
+}
+

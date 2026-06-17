@@ -1,0 +1,38 @@
+<div
+  class="game-card"
+  [class.game-card--marked]="item.isMarked"
+>
+  <button
+    class="game-card__button"
+    type="button"
+    [attr.aria-disabled]="item.isMarked"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp()"
+    (pointercancel)="onPointerCancel()"
+    (pointerleave)="onPointerLeave()"
+    (contextmenu)="onContextMenu($event)"
+    (click)="onClick()"
+    [attr.aria-label]="item.isMarked
+      ? item.image.title + ' är markerad'
+      : 'Markera ' + item.image.title"
+  >
+    <img
+      class="game-card__image"
+      [src]="item.image.imageUrl"
+      [alt]="item.image.title"
+      draggable="false"
+    />
+  </button>
+
+  @if (item.isMarked) {
+    <button
+      class="game-card__remove"
+      type="button"
+      (click)="onUnmark()"
+      [attr.aria-label]="'Ta bort markering från ' + item.image.title"
+    >
+      ✓
+    </button>
+  }
+</div>

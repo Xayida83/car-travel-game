@@ -1,0 +1,68 @@
+<section
+  class="image-viewer"
+  role="dialog"
+  aria-modal="true"
+  tabindex="0"
+  [attr.aria-label]="'Storbild för ' + currentItem.image.title"
+  (pointerdown)="onPointerDown($event)"
+  (pointerup)="onPointerUp($event)"
+  (keydown.arrowleft)="onArrowLeft()"
+  (keydown.arrowright)="onArrowRight()"
+  (contextmenu)="onContextMenu($event)"
+>
+  <button
+    class="image-viewer__close"
+    type="button"
+    mat-button
+    (click)="close()"
+    [attr.aria-label]="'Stäng storbild för ' + currentItem.image.title"
+  >
+    X
+  </button>
+
+  <div class="image-viewer__content">
+    @if (hasMultipleItems) {
+      <button
+        class="image-viewer__nav image-viewer__nav--previous"
+        type="button"
+        mat-button
+        (click)="showPrevious()"
+        aria-label="Visa föregående bild"
+      >
+        ‹
+      </button>
+    }
+
+    <img
+      class="image-viewer__image"
+      [src]="currentItem.image.imageUrl"
+      [alt]="currentItem.image.title"
+      draggable="false"
+      (contextmenu)="onContextMenu($event)"
+    />
+
+    @if (hasMultipleItems) {
+      <button
+        class="image-viewer__nav image-viewer__nav--next"
+        type="button"
+        mat-button
+        (click)="showNext()"
+        aria-label="Visa nästa bild"
+      >
+        ›
+      </button>
+    }
+
+    <h2 class="image-viewer__title">
+      {{ currentItem.image.title }}
+    </h2>
+
+    <p class="image-viewer__text">
+      Leta efter: {{ currentItem.image.title }}
+    </p>
+
+    <p class="image-viewer__counter" aria-live="polite">
+      Bild {{ currentIndex + 1 }} av {{ data.items.length }}
+    </p>
+  </div>
+</section>

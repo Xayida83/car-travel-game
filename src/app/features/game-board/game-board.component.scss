@@ -1,0 +1,19 @@
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 0.65rem;
+  row-gap: 0.65rem;
+
+  align-items: center;
+}
+
+/*
+  Extra mellanrum efter varje block om 16 bilder.
+  Eftersom vi har 4 bilder per rad är bild 13–16 sista raden i blocket.
+*/
+app-game-card:nth-child(16n + 13),
+app-game-card:nth-child(16n + 14),
+app-game-card:nth-child(16n + 15),
+app-game-card:nth-child(16n) {
+  margin-bottom: 1.25rem;
+}

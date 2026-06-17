@@ -1,0 +1,152 @@
+:host {
+  display: block;
+  animation: card-enter var(--motion-slow) both;
+  animation-delay: var(--card-delay, 0ms);
+}
+
+.game-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.game-card__button {
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0.35rem;
+
+  border: 0.12rem solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  background: var(--color-surface-soft);
+  box-shadow: var(--shadow-card);
+
+  cursor: pointer;
+
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    transform var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    opacity var(--motion-normal),
+    filter var(--motion-normal);
+}
+
+.game-card__button:active {
+  transform: scale(0.96);
+}
+
+.game-card__button[aria-disabled='true'] {
+  cursor: default;
+}
+
+.game-card__button[aria-disabled='true']:active {
+  transform: none;
+}
+
+.game-card__button:focus-visible,
+.game-card__remove:focus-visible {
+  outline: 0.2rem solid var(--color-primary);
+  outline-offset: 0.2rem;
+}
+
+.game-card__image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+
+  transition: transform var(--motion-normal);
+}
+
+.game-card__button:active .game-card__image {
+  transform: scale(0.96);
+}
+
+.game-card--marked .game-card__button {
+  opacity: 0.42;
+  filter: saturate(0.55);
+  animation: found-pulse 520ms ease both;
+}
+
+.game-card__remove {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+
+  display: grid;
+  place-items: center;
+
+  width: 4rem;
+  height: 4rem;
+
+  border: 0.12rem solid var(--color-border);
+  border-radius: var(--radius-pill);
+
+  background: var(--color-primary);
+  color: var(--color-primary-text);
+
+  box-shadow: var(--shadow-card);
+
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1;
+
+  cursor: pointer;
+
+  animation: check-pop var(--motion-normal) both;
+
+  transition:
+    transform var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.game-card__remove:active {
+  transform: scale(0.92);
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+@keyframes found-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: var(--shadow-card);
+  }
+
+  35% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 0.35rem rgba(96, 165, 250, 0.28);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: var(--shadow-card);
+  }
+}
