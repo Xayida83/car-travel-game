@@ -3,7 +3,7 @@ import { ImageBankItem } from '../core/models/image-bank-item.model';
 export const IMAGE_BANK: ImageBankItem[] = [
   {
     id: 'cow',
-    title: 'Ko',
+    title: 'Kossor',
     imageUrl: 'assets/images/cow.svg',
   },
   {
@@ -104,7 +104,7 @@ export const IMAGE_BANK: ImageBankItem[] = [
  },
  {
   id: 'horse',
-  title: 'Häst',
+  title: 'Hästar',
   imageUrl: 'assets/images/horse.svg'
  },
  {
@@ -186,11 +186,6 @@ export const IMAGE_BANK: ImageBankItem[] = [
   id: 'church',
   title: 'Kyrka',
   imageUrl: 'assets/images/church.svg'
- },
- {
-  id: 'chicken',
-  title: 'Hönsgård',
-  imageUrl: 'assets/images/chicken.svg'
  },
  {
   id: 'sheep',
