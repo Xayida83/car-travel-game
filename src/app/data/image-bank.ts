@@ -191,5 +191,15 @@ export const IMAGE_BANK: ImageBankItem[] = [
   id: 'sheep',
   title: 'Får',
   imageUrl: 'assets/images/sheep.svg'
- }
+ },
+ {
+  id: 'roundabout',
+  title: 'Rondell-skylt',
+  imageUrl: 'assets/images/roundabout.png'
+ },
+{
+  id: 'wild-animal',
+  title: 'Varning vilt skylt',
+  imageUrl: 'assets/images/wild-animal.png'
+}
 ];
