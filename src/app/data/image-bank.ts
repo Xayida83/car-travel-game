@@ -31,11 +31,10 @@ export const IMAGE_BANK: ImageBankItem[] = [
     title: 'Gul bil',
     imageUrl: 'assets/images/car-yellow.svg',   
   },
-
   {
-    id: 'police-car',
-    title: 'Polisbil',
-    imageUrl: 'assets/images/police-car.svg',
+    id: 'trector',
+    title: 'Traktor',
+    imageUrl: 'assets/images/tractor.svg',
   },
   {
     id: 'bus',
@@ -63,9 +62,9 @@ export const IMAGE_BANK: ImageBankItem[] = [
     imageUrl: 'assets/images/fuel.svg',
  },
  {
-    id: 'sunglasses',
-    title: 'Solglasögon',
-    imageUrl: 'assets/images/sunnys.svg'
+    id: 'fountain',
+    title: 'Fontän eller staty',
+    imageUrl: 'assets/images/fountain.svg'
  },
  {
     id: 'school',
@@ -83,9 +82,9 @@ export const IMAGE_BANK: ImageBankItem[] = [
   imageUrl: 'assets/images/hospital.svg'
  },
  {
-  id: 'fire-truck',
-  title: 'Brandbil',
-  imageUrl: 'assets/images/fire-truck.svg'
+  id: 'flag',
+  title: 'Flagga',
+  imageUrl: 'assets/images/flag.svg'
  },
  {
   id: 'taxi',
@@ -93,9 +92,9 @@ export const IMAGE_BANK: ImageBankItem[] = [
   imageUrl: 'assets/images/taxi.svg'
  },
  {
-  id: 'tram',
-  title: 'Spårvagn',
-  imageUrl: 'assets/images/tram.svg'
+  id: 'dress',
+  title: 'Klänning',
+  imageUrl: 'assets/images/dress.svg'
  },
  {  
   id: 'hamburger',
@@ -124,7 +123,7 @@ export const IMAGE_BANK: ImageBankItem[] = [
  },
  {
   id: 'island',
-  title: 'Ö',
+  title: 'En ö',
   imageUrl: 'assets/images/island.svg'
  },
  {
@@ -153,9 +152,9 @@ export const IMAGE_BANK: ImageBankItem[] = [
   imageUrl: 'assets/images/scooter.svg'
  },
  {
-  id: 'swan',
-  title: 'Svan',
-  imageUrl: 'assets/images/swan.svg'
+  id: 'beach',
+  title: 'Badstrand',
+  imageUrl: 'assets/images/beach.svg'
  },
  {
   id: 'tractor',
@@ -173,11 +172,6 @@ export const IMAGE_BANK: ImageBankItem[] = [
   imageUrl: 'assets/images/wind-energy.svg'
  },
  {
-  id: 'warning-sign',
-  title: 'Varningsskylt',
-  imageUrl: 'assets/images/warning.svg'
- },
- {
   id: 'train',
   title: 'Tåg',
   imageUrl: 'assets/images/train.svg'
@@ -188,18 +182,33 @@ export const IMAGE_BANK: ImageBankItem[] = [
   imageUrl: 'assets/images/church.svg'
  },
  {
-  id: 'sheep',
-  title: 'Får',
-  imageUrl: 'assets/images/sheep.svg'
- },
- {
-  id: 'roundabout',
-  title: 'Rondell-skylt',
-  imageUrl: 'assets/images/roundabout.png'
+  id: 'camping',
+  title: 'Camping',
+  imageUrl: 'assets/images/camping.svg'
  },
 {
-  id: 'wild-animal',
-  title: 'Varning vilt skylt',
-  imageUrl: 'assets/images/wild-animal.png'
+  id: 'caravan',
+  title: 'Husvagn',
+  imageUrl: 'assets/images/caravan.svg'
+},
+{
+  id: 'camper',
+  title: 'Husbil',
+  imageUrl: 'assets/images/camper.svg'
+},
+{
+  id: 'horse-transport',
+  title: 'Hästtransport',
+  imageUrl: 'assets/images/horse-transport.svg'
+},
+{
+  id: 'construction',
+  title: 'Varning byggarbetsplats',
+  imageUrl: 'assets/images/construction.svg'
+},
+{
+  id: 'power-lines',
+  title: 'El ledningar',
+  imageUrl: 'assets/images/power-line.svg'
 }
 ];
