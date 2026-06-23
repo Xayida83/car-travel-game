@@ -192,3 +192,52 @@
 
   box-shadow: var(--shadow-card) !important;
 }
+
+.app-footer {
+  width: min(100%, 34rem);
+  margin: 2rem auto 0;
+  padding: 1rem 0 0.5rem;
+
+  text-align: center;
+}
+
+.app-footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+
+  border: 0.1rem solid var(--color-border);
+  border-radius: var(--radius-pill);
+
+  background: var(--color-surface-soft);
+  color: var(--color-text-muted);
+
+  box-shadow: var(--shadow-card);
+
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+
+  transition:
+    transform var(--motion-fast),
+    color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.app-footer a:hover {
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}
+
+.app-footer a:active {
+  transform: scale(0.97);
+}
+
+.app-footer a:focus-visible {
+  outline: 0.2rem solid var(--color-primary);
+  outline-offset: 0.2rem;
+}
