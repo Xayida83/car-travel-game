@@ -157,11 +157,6 @@ export const IMAGE_BANK: ImageBankItem[] = [
   imageUrl: 'assets/images/beach.svg'
  },
  {
-  id: 'tractor',
-  title: 'Traktor',
-  imageUrl: 'assets/images/tractor.svg'
- },
- {
   id: 'van',
   title: 'Skåpbil',
   imageUrl: 'assets/images/van.svg'
