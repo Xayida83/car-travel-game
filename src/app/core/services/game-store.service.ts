@@ -3,6 +3,7 @@ import { computed, Injectable, signal } from '@angular/core';
 import { IMAGE_BANK } from '../../data/image-bank';
 import { createBoard } from '../logic/board-generator';
 import { GameState } from '../models/game-state.model';
+import { getCompletedLines } from '../logic/completed-line-detector';
 
 const initialState: GameState = {
   status: 'setup',
@@ -14,6 +15,8 @@ const initialState: GameState = {
   ],
   board: [],
   activePlayerId: 'player-1',
+  completedLines: [],
+  notifiedCompletedLineIds: [],
 };
 
 @Injectable({
@@ -39,6 +42,16 @@ export class GameStoreService {
   readonly unmarkedItems = computed(() =>
   this.state().board.filter((item) => !item.isMarked)
   );
+   
+  readonly completedLines = computed(() => this.state().completedLines);
+
+  readonly nextCompletedLineToNotify = computed(() => {
+    const currentState = this.state();
+
+    return currentState.completedLines.find(
+      (line) => !currentState.notifiedCompletedLineIds.includes(line.id)
+    );
+  });
 
   readonly isFinished = computed(() => this.state().status === 'finished');
 
@@ -59,6 +72,8 @@ export class GameStoreService {
       ...initialState,
       status: 'playing',
       board,
+      completedLines: [],
+      notifiedCompletedLineIds: [],
     });
   }
 
@@ -75,11 +90,13 @@ export class GameStoreService {
         : item
     );
 
+    const completedLines = getCompletedLines(board);
     const allMarked = board.every((item) => item.isMarked);
 
     this.state.set({
       ...currentState,
       board,
+      completedLines,
       status: allMarked ? 'finished' : 'playing',
     });
   }
@@ -93,10 +110,30 @@ export class GameStoreService {
         : item
     );
 
+    const completedLines = getCompletedLines(board);
+
     this.state.set({
       ...currentState,
       board,
+      completedLines,
       status: 'playing',
+    });
+  }
+
+
+  acknowledgeCompletedLine(lineId: string): void {
+    const currentState = this.state();
+
+    if (currentState.notifiedCompletedLineIds.includes(lineId)) {
+      return;
+    }
+
+    this.state.set({
+      ...currentState,
+      notifiedCompletedLineIds: [
+        ...currentState.notifiedCompletedLineIds,
+        lineId,
+      ],
     });
   }
 
@@ -104,3 +141,4 @@ export class GameStoreService {
     this.state.set(initialState);
   }
 }
+

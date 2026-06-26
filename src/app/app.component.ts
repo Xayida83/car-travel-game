@@ -20,6 +20,8 @@ export class AppComponent {
   readonly remainingCount = this.gameStore.remainingCount;
   readonly unmarkedItems = this.gameStore.unmarkedItems;
   readonly availableImageCount = this.gameStore.availableImageCount;
+  readonly nextCompletedLineToNotify =
+  this.gameStore.nextCompletedLineToNotify;
 
   startGame(imageCount: number): void {
   this.gameStore.startNewGame(imageCount);
