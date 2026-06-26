@@ -21,6 +21,7 @@ export class AppComponent {
   private readonly dialog = inject(MatDialog);
 
   private completedLineDialogOpen = false;
+  private finishedDialogShown = false; 
 
   readonly status = this.gameStore.status;
   readonly board = this.gameStore.board;
@@ -32,47 +33,34 @@ export class AppComponent {
   this.gameStore.nextCompletedLineToNotify;
 
   constructor() {
-  effect(() => {
-    const completedLine = this.nextCompletedLineToNotify();
+    effect(() => {
+      const status = this.status();
+      const completedLine = this.nextCompletedLineToNotify();
 
-    if (!completedLine || this.completedLineDialogOpen) {
-      return;
-    }
-
-    this.completedLineDialogOpen = true;
-
-    const dialogRef = this.dialog.open(CompletedLineDialogComponent, {
-      data: {
-        line: completedLine,
-      },
-      width: '92vw',
-      maxWidth: '28rem',
-      autoFocus: 'dialog',
-      restoreFocus: true,
-    });
-
-    dialogRef.afterClosed().subscribe(
-      (action?: CompletedLineDialogAction) => {
-        this.completedLineDialogOpen = false;
-
-        if (action === 'new-16') {
-          this.startGame(16);
-          return;
-        }
-
-        if (action === 'new-32') {
-          this.startGame(32);
-          return;
-        }
-
-        this.gameStore.acknowledgeCompletedLine(completedLine.id);
+      if (this.completedLineDialogOpen) {
+        return;
       }
-    );
-  });
-}
+
+      if (status === 'finished' && !this.finishedDialogShown) {
+        this.openCompletedDialog({
+          mode: 'all-found',
+        });
+
+        return;
+      }
+
+      if (status === 'playing' && completedLine) {
+        this.openCompletedDialog({
+          mode: 'completed-line',
+          line: completedLine,
+        });
+      }
+    });
+  }
 
   startGame(imageCount: number): void {
-  this.gameStore.startNewGame(imageCount);
+    this.finishedDialogShown = false;
+    this.gameStore.startNewGame(imageCount);
   }
 
   canStartGame(imageCount: number): boolean {
@@ -88,33 +76,74 @@ export class AppComponent {
   }
 
 
-openLargeImage(itemId: string): void {
-  const items = this.unmarkedItems();
+  openLargeImage(itemId: string): void {
+    const items = this.unmarkedItems();
 
-  if (items.length === 0) {
-    return;
+    if (items.length === 0) {
+      return;
+    }
+
+    const selectedIndex = items.findIndex((item) => item.id === itemId);
+
+    if (selectedIndex === -1) {
+      return;
+    }
+
+    this.dialog.open(ImageViewerDialogComponent, {
+      data: {
+        items,
+        selectedIndex,
+      },
+      width: '92vw',
+      maxWidth: '30rem',
+      maxHeight: '90dvh',
+      autoFocus: 'dialog',
+      restoreFocus: true,
+    });
   }
 
-  const selectedIndex = items.findIndex((item) => item.id === itemId);
+  private openCompletedDialog(data: {
+  mode: 'completed-line' | 'all-found';
+  line?: any;
+}): void {
+  this.completedLineDialogOpen = true;
 
-  if (selectedIndex === -1) {
-    return;
+  if (data.mode === 'all-found') {
+    this.finishedDialogShown = true;
   }
 
-  this.dialog.open(ImageViewerDialogComponent, {
-    data: {
-      items,
-      selectedIndex,
-    },
+  const dialogRef = this.dialog.open(CompletedLineDialogComponent, {
+    data,
     width: '92vw',
-    maxWidth: '30rem',
-    maxHeight: '90dvh',
+    maxWidth: '28rem',
+    panelClass: 'completed-line-dialog-panel',
     autoFocus: 'dialog',
     restoreFocus: true,
   });
+
+  dialogRef.afterClosed().subscribe(
+    (action?: CompletedLineDialogAction) => {
+      this.completedLineDialogOpen = false;
+
+      if (action === 'new-16') {
+        this.startGame(16);
+        return;
+      }
+
+      if (action === 'new-32') {
+        this.startGame(32);
+        return;
+      }
+
+      if (data.mode === 'completed-line' && data.line) {
+        this.gameStore.acknowledgeCompletedLine(data.line.id);
+      }
+    }
+  );
 }
 
- resetGame(): void {
-    this.gameStore.resetGame();
-  }
+resetGame(): void {
+  this.finishedDialogShown = false;
+  this.gameStore.resetGame();
+}
 }

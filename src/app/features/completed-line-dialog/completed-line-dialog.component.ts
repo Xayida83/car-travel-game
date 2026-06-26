@@ -13,8 +13,11 @@ export type CompletedLineDialogAction =
   | 'new-16'
   | 'new-32';
 
+export type CompletedLineDialogMode = 'completed-line' | 'all-found';
+
 export type CompletedLineDialogData = {
-  line: CompletedLine;
+  mode: CompletedLineDialogMode;
+  line?: CompletedLine;
 };
 
 @Component({
@@ -30,8 +33,27 @@ export class CompletedLineDialogComponent {
 
   readonly data = inject<CompletedLineDialogData>(MAT_DIALOG_DATA);
 
-  get directionText(): string {
-    return this.data.line.direction === 'row' ? 'vågrätt' : 'lodrätt';
+   get isAllFound(): boolean {
+    return this.data.mode === 'all-found';
+  }
+
+    get title(): string {
+    return this.isAllFound ? 'Alla föremål hittade!' : 'Fyra i rad!';
+  }
+
+  get message(): string {
+    if (this.isAllFound) {
+      return 'Grattis, du hittade alla föremål.';
+    }
+
+    const directionText =
+      this.data.line?.direction === 'row' ? 'vågrätt' : 'lodrätt';
+
+    return `Grattis, du fick fyra i rad ${directionText}.`;
+  }
+
+  get primaryButtonText(): string {
+    return this.isAllFound ? 'Stäng' : 'Spela vidare';
   }
 
   close(action: CompletedLineDialogAction): void {

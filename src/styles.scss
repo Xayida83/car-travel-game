@@ -126,3 +126,10 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
+.completed-line-dialog-panel .mat-mdc-dialog-surface {
+  border-radius: calc(var(--radius-lg) + 0.35rem);
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}

@@ -48,9 +48,11 @@ export class GameStoreService {
   readonly nextCompletedLineToNotify = computed(() => {
     const currentState = this.state();
 
-    return currentState.completedLines.find(
-      (line) => !currentState.notifiedCompletedLineIds.includes(line.id)
-    );
+    if (currentState.notifiedCompletedLineIds.length > 0) {
+      return undefined;
+    }
+
+    return currentState.completedLines[0];
   });
 
   readonly isFinished = computed(() => this.state().status === 'finished');
