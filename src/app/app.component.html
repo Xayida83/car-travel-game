@@ -67,13 +67,6 @@
     (unmark)="unmarkItem($event)"
     (longPress)="openLargeImage($event)"
     />
-    
-    @if (nextCompletedLineToNotify(); as completedLine) {
-  <p style="text-align: center; font-weight: 800;">
-    Grattis! Du fick fyra i rad:
-    {{ completedLine.direction === 'row' ? 'vågrätt' : 'lodrätt' }}
-  </p>
-}
 
     <div class="game-actions" aria-label="Spelval">
   <button

@@ -1,0 +1,42 @@
+<section
+  class="completed-line-dialog"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="completed-line-title"
+>
+  <div class="completed-line-dialog__badge" aria-hidden="true">
+    🎉
+  </div>
+
+  <h2 id="completed-line-title">
+    Fyra i rad!
+  </h2>
+
+  <p>
+    Grattis, du fick fyra i rad {{ directionText }}.
+  </p>
+
+  <div class="completed-line-dialog__actions">
+    <button
+      type="button"
+      class="completed-line-dialog__primary"
+      (click)="close('continue')"
+    >
+      Spela vidare
+    </button>
+
+    <button
+      type="button"
+      (click)="close('new-16')"
+    >
+      Nytt spel med 16 bilder
+    </button>
+
+    <button
+      type="button"
+      (click)="close('new-32')"
+    >
+      Nytt spel med 32 bilder
+    </button>
+  </div>
+</section>
