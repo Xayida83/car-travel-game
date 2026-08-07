@@ -91,11 +91,6 @@ export const IMAGE_BANK: ImageBankItem[] = [
   title: 'Taxi',
   imageUrl: 'assets/images/taxi.svg'
  },
- {
-  id: 'dress',
-  title: 'Klänning',
-  imageUrl: 'assets/images/dress.svg'
- },
  {  
   id: 'hamburger',
   title: 'Snabbmat restaurang',
@@ -205,5 +200,5 @@ export const IMAGE_BANK: ImageBankItem[] = [
   id: 'power-lines',
   title: 'El ledningar',
   imageUrl: 'assets/images/power-line.svg'
-}
+},
 ];
