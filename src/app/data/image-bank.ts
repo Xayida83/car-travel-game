@@ -57,6 +57,14 @@ export const IMAGE_BANK: ImageBankItem[] = [
     },
     imageUrl: 'assets/images/car-black.svg',
   },
+   {
+    id: 'car-white',
+    title: {
+      sv: 'Vit bil',
+      en: 'White car',
+    },
+    imageUrl: 'assets/images/car-white.svg',
+  },
   {
     id: 'trector',
     title: {
