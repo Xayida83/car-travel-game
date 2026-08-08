@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+
 import { GameStatus } from '../../core/models/game-state.model';
+import { LanguageService } from '../../core/services/language.service';
+import { TranslationKey } from '../../data/translation';
 
 @Component({
   selector: 'app-game-status',
@@ -9,6 +12,8 @@ import { GameStatus } from '../../core/models/game-state.model';
   styleUrl: './game-status.component.scss',
 })
 export class GameStatusComponent {
+  private readonly languageService = inject(LanguageService);
+
   @Input({ required: true }) status!: GameStatus;
   @Input({ required: true }) markedCount!: number;
   @Input({ required: true }) totalCount!: number;
@@ -16,7 +21,7 @@ export class GameStatusComponent {
 
   @Output() resetGame = new EventEmitter<void>();
 
-  onResetGame(): void {
-    this.resetGame.emit();
+  t(key: TranslationKey): string {
+    return this.languageService.translate(key);
   }
 }

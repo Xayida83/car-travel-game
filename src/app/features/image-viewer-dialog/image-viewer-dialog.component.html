@@ -36,7 +36,7 @@
     <img
       class="image-viewer__image"
       [src]="currentItem.image.imageUrl"
-      [alt]="currentItem.image.title"
+      [alt]="imageTitle()"
       draggable="false"
       (contextmenu)="onContextMenu($event)"
     />
@@ -54,12 +54,12 @@
     }
 
     <h2 class="image-viewer__title">
-      {{ currentItem.image.title }}
+      {{ imageTitle() }}
     </h2>
 
 
     <p class="image-viewer__counter" aria-live="polite">
-      Bild {{ currentIndex + 1 }} av {{ data.items.length }}
+      {{ t('image') }} {{ currentIndex + 1 }} {{ t('of') }} {{ data.items.length }}
     </p>
   </div>
 </section>

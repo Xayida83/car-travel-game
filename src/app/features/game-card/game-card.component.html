@@ -20,7 +20,7 @@
     <img
       class="game-card__image"
       [src]="item.image.imageUrl"
-      [alt]="item.image.title"
+      [alt]="imageTitle()"
       draggable="false"
     />
   </button>
@@ -30,7 +30,7 @@
       class="game-card__remove"
       type="button"
       (click)="onUnmark()"
-      [attr.aria-label]="'Ta bort markering från ' + item.image.title"
+      [attr.aria-label]="t('markAsFound') + ': ' + imageTitle()"
     >
       ✓
     </button>

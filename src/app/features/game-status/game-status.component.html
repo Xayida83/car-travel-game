@@ -1,14 +1,11 @@
 <header class="game-status">
-  <h1>Bilrese-spelet</h1>
+  <h1>{{ t('appTitle') }}</h1>
 
   <p>
-    Hittade: {{ markedCount }} / {{ totalCount }}
+    {{ t('found') }}: {{ markedCount }} / {{ totalCount }}
   </p>
 
   <p>
-    Kvar: {{ remainingCount }}
+    {{ t('remaining') }}: {{ remainingCount }}
   </p>
 </header>
-
-
-

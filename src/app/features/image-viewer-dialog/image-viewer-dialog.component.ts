@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { BoardItem } from '../../core/models/board-item.model';
 
+import { LanguageService } from '../../core/services/language.service';
+import { TranslationKey } from '../../data/translation';
+
 export type ImageViewerDialogData = {
   items: BoardItem[];
   selectedIndex: number;
@@ -105,5 +108,15 @@ export class ImageViewerDialogComponent {
 
   onContextMenu(event: Event): void {
     event.preventDefault();
+  }
+
+  private readonly languageService = inject(LanguageService);
+
+  t(key: TranslationKey): string {
+    return this.languageService.translate(key);
+  }
+
+  imageTitle(): string {
+    return this.languageService.translateText(this.currentItem.image.title);
   }
 }

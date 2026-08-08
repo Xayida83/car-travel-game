@@ -20,7 +20,7 @@
   </div>
 
   <p class="completed-line-dialog__eyebrow">
-    Grattis!
+    {{ t('congrats') }}
   </p>
 
   <h2 id="completed-line-title">
@@ -44,14 +44,14 @@
       type="button"
       (click)="close('new-16')"
     >
-      Nytt spel med 16 bilder
+      {{ t('newGame16') }}
     </button>
 
     <button
       type="button"
       (click)="close('new-32')"
     >
-      Nytt spel med 32 bilder
+      {{ t('newGame32') }}
     </button>
   </div>
 </section>

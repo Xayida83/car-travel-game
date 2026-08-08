@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { BoardItem } from '../../core/models/board-item.model';
+
+import { LanguageService } from '../../core/services/language.service';
+import { TranslationKey } from '../../data/translation';
 
 @Component({
   selector: 'app-game-card',
@@ -96,5 +99,15 @@ export class GameCardComponent {
 
     window.clearTimeout(this.longPressTimer);
     this.longPressTimer = undefined;
+  }
+
+  private readonly languageService = inject(LanguageService);
+
+  t(key: TranslationKey): string {
+    return this.languageService.translate(key);
+  }
+  
+  imageTitle(): string {
+  return this.languageService.translateText(this.item.image.title);
   }
 }

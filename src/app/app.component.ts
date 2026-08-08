@@ -8,6 +8,9 @@ import {
   CompletedLineDialogComponent,
 } from './features/completed-line-dialog/completed-line-dialog.component';
 import { ImageViewerDialogComponent } from './features/image-viewer-dialog/image-viewer-dialog.component';
+import { Language } from './core/models/language.model';
+import { LanguageService } from './core/services/language.service';
+import { TranslationKey } from './data/translation';
 
 
 @Component({
@@ -31,6 +34,18 @@ export class AppComponent {
   readonly availableImageCount = this.gameStore.availableImageCount;
   readonly nextCompletedLineToNotify =
   this.gameStore.nextCompletedLineToNotify;
+
+  private readonly languageService = inject(LanguageService);
+
+  readonly language = this.languageService.language;
+
+  t(key: TranslationKey): string {
+    return this.languageService.translate(key);
+  }
+
+  setLanguage(language: Language): void {
+    this.languageService.setLanguage(language);
+  }
 
   constructor() {
     effect(() => {

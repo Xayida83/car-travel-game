@@ -1,55 +1,72 @@
 <main class="app-shell">
-  @if (status() === 'setup') {
-    <section class="start-screen">
-      <h1>Bilrese-spelet</h1>
+@if (status() === 'setup') {
+  <section class="start-screen">
+    <h1>{{ t('appTitle') }}</h1>
 
-      <p>
-        Leta efter saker utanför bilen och markera dem när du hittar dem.
-      </p>
+    <p>
+      {{ t('introText') }}
+    </p>
 
-      <section class="start-screen__instructions" aria-label="Så spelar du">
-        <h2>Så spelar du</h2>
+    <div class="language-switcher" aria-label="Välj språk">
+      <button
+        type="button"
+        [class.language-switcher__button--active]="language() === 'sv'"
+        [attr.aria-pressed]="language() === 'sv'"
+        (click)="setLanguage('sv')"
+      >
+        Svenska
+      </button>
 
-        <ul>
-          <li>
-            Tryck på en bild när du ser saken utanför bilen.
-          </li>
-          <li>
-            Tryck på markeringen för att ta bort den.
-          </li>
-          <li>
-            Håll länge på en bild för att se den större.
-          </li>
-        </ul>
-      </section>
+      <button
+        type="button"
+        [class.language-switcher__button--active]="language() === 'en'"
+        [attr.aria-pressed]="language() === 'en'"
+        (click)="setLanguage('en')"
+      >
+        English
+      </button>
+    </div>
 
-<div class="start-screen__actions">
-   <button
-    type="button"
-    (click)="startGame(16)"
-    [disabled]="!canStartGame(16)"
-    [attr.aria-disabled]="!canStartGame(16)"
-  >
-    Starta spel med 16 bilder
-  </button>
+    <section
+      class="start-screen__instructions"
+      [attr.aria-label]="t('instructionsTitle')"
+    >
+      <h2>{{ t('instructionsTitle') }}</h2>
 
-  <button
-    type="button"
-    (click)="startGame(32)"
-    [disabled]="!canStartGame(32)"
-    [attr.aria-disabled]="!canStartGame(32)"
-  >
-    Starta spel med 32 bilder
-  </button>
-</div>
-
-@if (!canStartGame(16)) {
-  <p class="start-screen__hint">
-    Lägg till fler bilder i bildbanken för att kunna starta med fler än 39 bilder.
-  </p>
-}
+      <ul>
+        <li>{{ t('instructionTapImage') }}</li>
+        <li>{{ t('instructionTapMark') }}</li>
+        <li>{{ t('instructionLongPress') }}</li>
+      </ul>
     </section>
-  }
+
+    <div class="start-screen__actions">
+      <button
+        type="button"
+        (click)="startGame(16)"
+        [disabled]="!canStartGame(16)"
+        [attr.aria-disabled]="!canStartGame(16)"
+      >
+        {{ t('startGame16') }}
+      </button>
+
+      <button
+        type="button"
+        (click)="startGame(32)"
+        [disabled]="!canStartGame(32)"
+        [attr.aria-disabled]="!canStartGame(32)"
+      >
+        {{ t('startGame32') }}
+      </button>
+    </div>
+
+    @if (!canStartGame(16)) {
+      <p class="start-screen__hint">
+        Lägg till fler bilder i bildbanken för att kunna starta spelet.
+      </p>
+    }
+  </section>
+}
 
   @if (status() === 'playing' || status() === 'finished') {
     <section class="game-screen">
@@ -68,13 +85,13 @@
     (longPress)="openLargeImage($event)"
     />
 
-    <div class="game-actions" aria-label="Spelval">
+   <div class="game-actions" aria-label="Spelval">
   <button
     type="button"
     (click)="startGame(16)"
     [disabled]="!canStartGame(16)"
   >
-    Starta om med 16 bilder
+    {{ t('restartGame16') }}
   </button>
 
   <button
@@ -82,7 +99,7 @@
     (click)="startGame(32)"
     [disabled]="!canStartGame(32)"
   >
-    Starta om med 32 bilder
+    {{ t('restartGame32') }}
   </button>
 
   <button
@@ -90,7 +107,7 @@
     type="button"
     (click)="resetGame()"
   >
-    Till startsidan
+    {{ t('backToStart') }}
   </button>
 </div>
     </section>

@@ -7,6 +7,8 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 
 import { CompletedLine } from '../../core/models/completed-line.model';
+import { LanguageService } from '../../core/services/language.service';
+import { TranslationKey } from '../../data/translation';
 
 export type CompletedLineDialogAction =
   | 'continue'
@@ -33,30 +35,40 @@ export class CompletedLineDialogComponent {
 
   readonly data = inject<CompletedLineDialogData>(MAT_DIALOG_DATA);
 
-   get isAllFound(): boolean {
-    return this.data.mode === 'all-found';
+get isAllFound(): boolean {
+  return this.data.mode === 'all-found';
+}
+
+get title(): string {
+  return this.isAllFound
+    ? this.t('allFoundTitle')
+    : this.t('fourInARowTitle');
+}
+
+get message(): string {
+  if (this.isAllFound) {
+    return this.t('allFoundMessage');
   }
 
-    get title(): string {
-    return this.isAllFound ? 'Alla föremål hittade!' : 'Fyra i rad!';
+  if (this.data.line?.direction === 'row') {
+    return this.t('fourInARowMessageHorizontal');
   }
 
-  get message(): string {
-    if (this.isAllFound) {
-      return 'Grattis, du hittade alla föremål.';
-    }
+  return this.t('fourInARowMessageVertical');
+}
 
-    const directionText =
-      this.data.line?.direction === 'row' ? 'vågrätt' : 'lodrätt';
-
-    return `Grattis, du fick fyra i rad ${directionText}.`;
-  }
-
-  get primaryButtonText(): string {
-    return this.isAllFound ? 'Stäng' : 'Spela vidare';
-  }
+get primaryButtonText(): string {
+  return this.isAllFound
+    ? this.t('close')
+    : this.t('continuePlaying');
+}
 
   close(action: CompletedLineDialogAction): void {
     this.dialogRef.close(action);
+  }
+  private readonly languageService = inject(LanguageService);
+
+  t(key: TranslationKey): string {
+    return this.languageService.translate(key);
   }
 }
