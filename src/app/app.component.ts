@@ -11,6 +11,8 @@ import { ImageViewerDialogComponent } from './features/image-viewer-dialog/image
 import { Language } from './core/models/language.model';
 import { LanguageService } from './core/services/language.service';
 import { TranslationKey } from './data/translation';
+import { Title } from '@angular/platform-browser';
+
 
 
 @Component({
@@ -38,6 +40,7 @@ export class AppComponent {
   private readonly languageService = inject(LanguageService);
 
   readonly language = this.languageService.language;
+  private readonly titleService = inject(Title);
 
   t(key: TranslationKey): string {
     return this.languageService.translate(key);
@@ -48,6 +51,10 @@ export class AppComponent {
   }
 
   constructor() {
+      effect(() => {
+        this.titleService.setTitle(this.t('pageTitle'));
+      });
+      
     effect(() => {
       const status = this.status();
       const completedLine = this.nextCompletedLineToNotify();

@@ -113,14 +113,14 @@
     </section>
     
   }
-  <footer class="app-footer">
-      <a
-        href="https://charlottalindberg.netlify.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Besök skaparen av Resespelen"
-      >
-        Skapat av mig
-      </a>
-    </footer>
+ <footer class="app-footer">
+  <a
+    href="https://charlottalindberg.netlify.app/"
+    target="_blank"
+    rel="noopener noreferrer"
+    [attr.aria-label]="t('createdByMe')"
+  >
+    {{ t('createdByMe') }}
+  </a>
+</footer>
 </main>

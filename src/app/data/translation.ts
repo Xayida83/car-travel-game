@@ -31,7 +31,9 @@ export type TranslationKey =
   | 'fourInARowMessageVertical'
   | 'allFoundMessage'
   | 'markAsFound'
-  | 'removeMark';
+  | 'removeMark'
+  | 'createdByMe'
+  | 'pageTitle';
 
 export const TRANSLATIONS: Record<Language, Record<TranslationKey, string>> = {
   sv: {
@@ -66,6 +68,8 @@ export const TRANSLATIONS: Record<Language, Record<TranslationKey, string>> = {
     allFoundMessage: 'Du hittade alla föremål.',
     markAsFound: 'Markera som hittad',
     removeMark: 'Ta bort markering',
+    createdByMe: 'Skapat av mig',
+    pageTitle: 'Rese Spelen',
   },
 
   en: {
@@ -100,5 +104,7 @@ export const TRANSLATIONS: Record<Language, Record<TranslationKey, string>> = {
     allFoundMessage: 'You found all items.',
     markAsFound: 'Mark as found',
     removeMark: 'Remove mark',
+    createdByMe: 'Created by me',
+    pageTitle: 'Road Trip Games',
   },
 };
